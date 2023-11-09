@@ -17,7 +17,7 @@ class NumberOfFallModel {
   factory NumberOfFallModel.fromMap(Map<String, dynamic> map) {
     return NumberOfFallModel(
       value: int.tryParse(map['value'].toString()) ?? 0,
-      dateTime: DateTime.tryParse(map['fromDate']) ?? DateTime.tryParse(map['date_time']) ?? DateTime.now(),
+      dateTime: DateTime.tryParse(map['fromDate'].toString()) ?? DateTime.tryParse(map['date_time'].toString()) ?? DateTime.now(),
     );
   }
 }
