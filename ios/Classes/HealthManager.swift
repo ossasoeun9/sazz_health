@@ -16,7 +16,9 @@ class HealthManager {
         guard let heartRate = HKObjectType.quantityType(forIdentifier: .heartRate) else { return }
         guard let sleep = HKObjectType.categoryType(forIdentifier: .sleepAnalysis) else { return }
         guard let bodyTemperature = HKObjectType.quantityType(forIdentifier: .bodyTemperature) else { return }
-        healthStore.requestAuthorization(toShare: nil, read: [numOfFallen, step, heartRate, sleep, bodyTemperature], completion: completion)
+        guard let calBurn = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned) else { return }
+        guard let bloodOxygen = HKObjectType.quantityType(forIdentifier: .oxygenSaturation) else { return }
+        healthStore.requestAuthorization(toShare: nil, read: [numOfFallen, step, heartRate, sleep, bodyTemperature, calBurn, bloodOxygen], completion: completion)
     }
 
     static func readNumberOfFallen(startDate: Date, endDate: Date, completion: @escaping (String?, Error?) -> Void) {
