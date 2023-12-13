@@ -11,16 +11,36 @@ class HealthManager {
     private static var healthStore = HKHealthStore()
 
     static func requestAuthorization(completion: @escaping (Bool, Error?) -> Void) {
-        guard let numOfFallen = HKObjectType.quantityType(forIdentifier: .numberOfTimesFallen) else { return }
-        guard let step = HKObjectType.quantityType(forIdentifier: .stepCount) else { return }
-        guard let heartRate = HKObjectType.quantityType(forIdentifier: .heartRate) else { return }
-        guard let sleep = HKObjectType.categoryType(forIdentifier: .sleepAnalysis) else { return }
-        guard let bodyTemperature = HKObjectType.quantityType(forIdentifier: .bodyTemperature) else { return }
-        guard let calBurn = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned) else { return }
-        guard let bloodOxygen = HKObjectType.quantityType(forIdentifier: .oxygenSaturation) else { return }
-        guard let distanceWalkingRunning = HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning) else { return }
-        healthStore.requestAuthorization(toShare: nil, read: [numOfFallen, step, heartRate, sleep, bodyTemperature, calBurn, bloodOxygen, distanceWalkingRunning], completion: completion)
-    }
+            guard let numOfFallen = HKObjectType.quantityType(forIdentifier: .numberOfTimesFallen) else { return }
+            guard let step = HKObjectType.quantityType(forIdentifier: .stepCount) else { return }
+            guard let heartRate = HKObjectType.quantityType(forIdentifier: .heartRate) else { return }
+            guard let sleep = HKObjectType.categoryType(forIdentifier: .sleepAnalysis) else { return }
+            guard let bodyTemperature = HKObjectType.quantityType(forIdentifier: .bodyTemperature) else { return }
+            guard let calBurn = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned) else { return }
+            guard let bloodOxygen = HKObjectType.quantityType(forIdentifier: .oxygenSaturation) else { return }
+            guard let distanceWalkingRunning = HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning) else { return }
+            guard let electrocardiogram = HKObjectType.quantityType(forIdentifier: .electrodermalActivity) else { return }
+            guard let floorsClimbed = HKObjectType.quantityType(forIdentifier: .flightsClimbed) else { return }
+            guard let exerciseTime = HKObjectType.quantityType(forIdentifier: .appleExerciseTime) else { return }
+
+            healthStore.requestAuthorization(
+                toShare: nil,
+                read: [
+                    numOfFallen,
+                    step,
+                    heartRate,
+                    sleep,
+                    bodyTemperature,
+                    calBurn,
+                    bloodOxygen,
+                    distanceWalkingRunning,
+                    electrocardiogram,
+                    floorsClimbed,
+                    exerciseTime,
+                ],
+                completion: completion
+            )
+        }
 
     static func readNumberOfFallen(startDate: Date, endDate: Date, completion: @escaping (String?, Error?) -> Void) {
         guard let numOfFallen = HKObjectType.quantityType(forIdentifier: .numberOfTimesFallen) else { return }
